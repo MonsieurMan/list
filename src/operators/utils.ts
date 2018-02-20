@@ -1,4 +1,4 @@
-import { Node, List } from '..';
+import { List } from '..';
 
 // This array should not be mutated. Thus a dummy element is placed in
 // it. Thus the affix will not be owned and thus not mutated.
@@ -8,13 +8,7 @@ export const branchBits = 5;
 export const mask = 31;
 export let newAffix: any[];
 
-export function copyArray(source: any[]): any[] {
-    const array = [];
-    for (let i = 0; i < source.length; ++i) {
-        array[i] = source[i];
-    }
-    return array;
-}
+
 
 export function cloneNode({ sizes, array }: Node): Node {
     return new Node(
@@ -122,11 +116,6 @@ export function nodeNth(node: Node, depth: number, index: number): any {
         current = current.array[path];
     }
     return nodeNthDense(current, depth, index);
-}
-
-export function arrayPush<A>(array: A[], a: A): A[] {
-    array.push(a);
-    return array;
 }
 
 /**
@@ -256,12 +245,7 @@ export function suffixToNode<A>(suffix: A[]): Node {
     return new Node(undefined, suffix);
 }
 
-/**
- * Create a reverse _copy_ of an array.
- */
-export function reverseArray<A>(array: A[]): A[] {
-    return array.slice().reverse();
-}
+
 
 export function prefixToNode<A>(prefix: A[]): Node {
     // FIXME: should take size and copy
@@ -294,17 +278,6 @@ export function sizeOfSubtree(node: Node, height: number): number {
     } else {
         return node.array.length;
     }
-}
-
-// TODO: array utils
-export function arrayPrepend<A>(value: A, array: A[]): A[] {
-    const newLength = array.length + 1;
-    const result = new Array(newLength);
-    result[0] = value;
-    for (let i = 1; i < newLength; ++i) {
-        result[i] = array[i - 1];
-    }
-    return result;
 }
 
 export type EqualsState = {
